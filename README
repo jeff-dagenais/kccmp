@@ -1,0 +1,29 @@
+---------------------------------------
+kccmp - kernel configuration comparison
+---------------------------------------
+
+kccmp is a simple tool for comparing two linux kernel ".config" files.
+
+It has the following features:
+1) Displays the configuration variables with different values.
+2) Displays the configuration variables and values which are found in
+only one of the compared files.
+
+usage:
+% kccmp /path/to/first/.config /path/to/second/.config
+
+example:
+% kccmp /usr/src/linux/.config /usr/src/linux/.config.old
+
+--------
+Building
+--------
+kccmp depends on Qt 4.x. It uses qmake for generating
+a standard Makefile.
+The standard build is as easy as:
+example:
+% qmake
+% make
+
+http://stoopidsimple.com/kccmp
+Salem Ganzhorn <eyekode@yahoo.com>
