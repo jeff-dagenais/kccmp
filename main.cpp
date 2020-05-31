@@ -32,47 +32,44 @@
 
 using namespace std;
 
-template< class _Type >
-ostream & operator<< (
-    ostream     &out,
-    const set<_Type> &d
-    )
+template <class _Type>
+ostream& operator<<(
+    ostream& out,
+    const set<_Type>& d )
 {
     typename set<_Type>::const_iterator i = d.begin();
-    while( d.end() != i ) {
-	out << *i << endl;
-	++i;
+    while ( d.end() != i ) {
+        out << *i << endl;
+        ++i;
     }
     return out;
 }
 
-int
-main(
+int main(
     int argc,
-    char ** argv
-    )
+    char** argv )
 {
-    QApplication a(argc,argv);
-    if( 3 != argc ) {
-	cerr << "symtax error, should be:" << endl;
-	cerr << "% " << argv[0] << " config_file1 config_file2" << endl;
-	exit(-1);
+    QApplication a( argc, argv );
+    if ( 3 != argc ) {
+        cerr << "symtax error, should be:" << endl;
+        cerr << "% " << argv[0] << " config_file1 config_file2" << endl;
+        exit( -1 );
     }
     int result;
     try {
-	config_view view;
-	const char * title = "kccmp - v0.3";
-	view.setWindowTitle(title);
-	view.show();
-	a.connect(&a,SIGNAL(lastWindowClosed()),&a,SLOT(quit()));
-	view.compare( argv[1],argv[2] );
-	result = a.exec();
-    } catch( exception& e ) {
-	cerr << e.what() << endl;
-	result = 2;
-    } catch(...) {
-	cerr << "caught unhandled exception" << endl;
-	result = 1;
+        config_view view;
+        const char* title = "kccmp - v0.3";
+        view.setWindowTitle( title );
+        view.show();
+        a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
+        view.compare( argv[1], argv[2] );
+        result = a.exec();
+    } catch ( exception& e ) {
+        cerr << e.what() << endl;
+        result = 2;
+    } catch ( ... ) {
+        cerr << "caught unhandled exception" << endl;
+        result = 1;
     }
     return result;
 }

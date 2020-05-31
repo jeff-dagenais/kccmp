@@ -23,10 +23,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *----------------------------------------------------------------------*/
 
+#include <QRegExp>
 #include <map>
 #include <set>
 #include <string>
-#include <QRegExp>
 
 #include "config_value.hpp"
 
@@ -34,39 +34,41 @@
 class config {
 public:
     config();
-    config( const char *filename );
+    config( const char* filename );
     ~config();
 
 public:
-    typedef std::map<std::string,config_value> map;
+    typedef std::map<std::string, config_value> map;
     typedef map::const_iterator const_iterator;
 
 public:
-    void read( const char * filename );
+    void read( const char* filename );
     ///\brief delete all entries
     void clear();
-    void add( const std::string &key, const config_value &cv );
-    const config_value *find( const std::string &key ) const;
+    void add( const std::string& key, const config_value& cv );
+    const config_value* find( const std::string& key ) const;
     const_iterator begin() const;
     const_iterator end() const;
+
 public:
     static void analyze( const config& c1, const config& c2,
-			 std::set<std::string> &cunion,
-			 std::set<std::string> &diff,
-			 std::set<std::string> &in1,
-			 std::set<std::string> &in2 );
+        std::set<std::string>& cunion,
+        std::set<std::string>& diff,
+        std::set<std::string>& in1,
+        std::set<std::string>& in2 );
     friend class config_test;
+
 protected:
     QRegExp get_regex() const;
-    bool parse(QRegExp       &exp,
-	       const char    *line,
-	       std::string   &key,
-	       config_value  &cv );
-    
+    bool parse( QRegExp& exp,
+        const char* line,
+        std::string& key,
+        config_value& cv );
+
 protected:
     map m_map;
 };
 
-std::ostream& operator<< (std::ostream&, const config& );
+std::ostream& operator<<( std::ostream&, const config& );
 
 #endif

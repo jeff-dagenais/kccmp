@@ -23,56 +23,55 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *----------------------------------------------------------------------*/
 
-#include <string>
 #include <iostream>
+#include <string>
 
 class config_value {
 public:
     typedef enum {
-	No,
-	Yes,
-	Module
+        No,
+        Yes,
+        Module
     } value_constant;
-    
+
 public:
     config_value();
-    config_value( const config_value &cv );
+    config_value( const config_value& cv );
     config_value( value_constant vs );
     config_value( int i );
-    config_value( const std::string &str );
+    config_value( const std::string& str );
     config_value( double d );
     ~config_value();
 
-    const config_value& operator= ( const config_value &cv );
-    const config_value& operator= ( int i );
-    const config_value& operator= ( double d );
-    const config_value& operator= ( const std::string & str );
-    const config_value& operator= ( value_constant vc );
-    
-    bool operator== (const config_value &cv ) const;
-    friend std::ostream& operator<< (std::ostream&,const config_value&);
-    
+    const config_value& operator=( const config_value& cv );
+    const config_value& operator=( int i );
+    const config_value& operator=( double d );
+    const config_value& operator=( const std::string& str );
+    const config_value& operator=( value_constant vc );
+
+    bool operator==( const config_value& cv ) const;
+    friend std::ostream& operator<<( std::ostream&, const config_value& );
+
 protected:
     ///\brief free resources
     void free();
-    
+
 protected:
     typedef enum {
-	Real,
-	Integer,
-	ValueConstant,
-	String
+        Real,
+        Integer,
+        ValueConstant,
+        String
     } type;
     type m_type;
     union {
-	double         real;
-	int            integer;
-	value_constant vc;
-	std::string   *str;
+        double real;
+        int integer;
+        value_constant vc;
+        std::string* str;
     } m_data;
 };
 
-std::ostream& operator<< (std::ostream& out, const config_value&);
+std::ostream& operator<<( std::ostream& out, const config_value& );
 
 #endif
-

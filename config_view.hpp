@@ -23,11 +23,11 @@
  *----------------------------------------------------------------------*/
 
 #if KCCMP_QT_4
-#include <QObject>
 #include <QFrame>
+#include <QObject>
 #else
-#include <qobject.h>
 #include <qframe.h>
+#include <qobject.h>
 #endif
 
 #include <set>
@@ -39,21 +39,22 @@ class QTabWidget;
 
 class config_view : public QFrame {
     Q_OBJECT;
+
 public:
-    config_view( QWidget *parent = 0 );
+    config_view( QWidget* parent = 0 );
     virtual ~config_view();
 
-    void compare( const std::string &filename1,
-		  const std::string &filename2 );
+    void compare( const std::string& filename1,
+        const std::string& filename2 );
 
 protected:
-    void add_diff_tab( QTabWidget *tab, const std::set<std::string> &info,
-		       const config& c1, const config &c2,
-		       const QString &dir1, const QString &dir2 );
-    void add_set_tab( QTabWidget    *tab,
-		      const std::set<std::string> &info,
-		      const config& c,
-		      const QString &label );
- };
+    void add_diff_tab( QTabWidget* tab, const std::set<std::string>& info,
+        const config& c1, const config& c2,
+        const QString& dir1, const QString& dir2 );
+    void add_set_tab( QTabWidget* tab,
+        const std::set<std::string>& info,
+        const config& c,
+        const QString& label );
+};
 
 #endif
