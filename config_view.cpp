@@ -47,12 +47,7 @@ void config_view::compare(
 {
     {
         const QObjectList& trash = children();
-        QObjectList::const_iterator i = trash.begin();
-        while ( trash.end() != i ) {
-            QObjectList::const_iterator j = i;
-            ++i;
-            delete *j;
-        }
+        qDeleteAll( trash );
     }
 
     config c1;
