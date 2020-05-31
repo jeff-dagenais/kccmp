@@ -35,8 +35,6 @@
 
 using namespace std;
 
-config_view::~config_view() { }
-
 config_view::config_view(
     QWidget* parent )
     : QFrame( parent )

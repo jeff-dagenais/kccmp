@@ -1,12 +1,12 @@
 #ifndef CONFIG_VIEW_HPP
 #define CONFIG_VIEW_HPP
 /*----------------------------------------------------------------------
- * $Id: config_view.hpp,v 1.4 2005-10-03 02:43:20 ganzhorn Exp $             
+ * $Id: config_view.hpp,v 1.4 2005-10-03 02:43:20 ganzhorn Exp $
  *
  * Copyright (C)   2005            Salem Ganzhorn <eyekode@yahoo.com>
  *
  * This file is part of kccmp - Kernel Config CoMPare
- *                                                                      
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public License
  * as published by the Free Software Foundation.
@@ -38,11 +38,10 @@
 class QTabWidget;
 
 class config_view : public QFrame {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
-    config_view( QWidget* parent = 0 );
-    virtual ~config_view();
+    explicit config_view( QWidget* parent = nullptr );
 
     void compare( const std::string& filename1,
         const std::string& filename2 );
