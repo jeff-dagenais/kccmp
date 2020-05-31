@@ -1,11 +1,11 @@
 /*----------------------------------------------------------------------
- * $Id: config_view.cpp,v 1.6 2012-02-12 01:31:30 salem Exp $             
+ * $Id: config_view.cpp,v 1.6 2012-02-12 01:31:30 salem Exp $
  *
  *
  * Copyright (C)   2005            Salem Ganzhorn <eyekode@yahoo.com>
  *
  * This file is part of kccmp - Kernel Config CoMPare
- *                                                                      
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public License
  * as published by the Free Software Foundation.
@@ -50,10 +50,10 @@ void config_view::compare(
         qDeleteAll( trash );
     }
 
-    config c1;
-    config c2;
-    c1.read( filename1.c_str() );
-    c2.read( filename2.c_str() );
+    config c1( filename1.c_str() );
+    config c2( filename2.c_str() );
+    c1.read();
+    c2.read();
     set<string> cunion, diff, in1, in2;
     config::analyze( c1, c2, cunion, diff, in1, in2 );
 
@@ -110,30 +110,30 @@ void config_view::add_diff_tab(
         view->setHorizontalHeaderLabels( labels );
         stringstream ss;
         view->setAlternatingRowColors( true );
-        set<string>::const_iterator i = diff.begin();
         int row = 0;
-        while ( diff.end() != i ) {
+        for ( const auto& i : diff ) {
             QTableWidgetItem* item = new QTableWidgetItem();
-            item->setText( i->c_str() );
+            item->setText( i.c_str() );
             view->setItem( row, 0, item );
-            ss << *c1.find( *i );
+            ss << *c1.find( i );
             item = new QTableWidgetItem();
             item->setText( ss.str().c_str() );
             view->setItem( row, 1, item );
             ss.str( "" );
-            ss << *c2.find( *i );
+            ss << *c2.find( i );
             item = new QTableWidgetItem();
             item->setText( ss.str().c_str() );
             view->setItem( row, 2, item );
             ss.str( "" );
             ++row;
-            ++i;
         }
         view->resizeColumnToContents( 0 );
         view->resizeColumnToContents( 1 );
         view->resizeColumnToContents( 2 );
         add_to_tab = view;
-    } else {
+    }
+
+    else {
         QLabel* l = new QLabel( "N/A", tab );
         add_to_tab = l;
     }
@@ -157,20 +157,19 @@ void config_view::add_set_tab(
                << "Value";
         view->setHorizontalHeaderLabels( labels );
         stringstream ss;
-        set<string>::const_iterator i = info.begin();
         int row = 0;
-        while ( info.end() != i ) {
+        for ( const auto& i : info ) {
             QTableWidgetItem* item = new QTableWidgetItem();
-            item->setText( i->c_str() );
+            item->setText( i.c_str() );
             view->setItem( row, 0, item );
-            ss << *c.find( *i );
+            ss << *c.find( i );
             item = new QTableWidgetItem();
             item->setText( ss.str().c_str() );
             view->setItem( row, 1, item );
             ss.str( "" );
             ++row;
-            ++i;
         }
+
         view->resizeColumnToContents( 0 );
         view->resizeColumnToContents( 1 );
         add_to_tab = view;

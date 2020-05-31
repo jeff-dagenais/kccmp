@@ -1,11 +1,11 @@
 /*----------------------------------------------------------------------
- * $Id: config.cpp,v 1.4 2012-02-12 01:31:30 salem Exp $             
+ * $Id: config.cpp,v 1.4 2012-02-12 01:31:30 salem Exp $
  *
  *
  * Copyright (C)   2005            Salem Ganzhorn <eyekode@yahoo.com>
  *
  * This file is part of kccmp - Kernel Config CoMPare
- *                                                                      
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public License
  * as published by the Free Software Foundation.
@@ -26,22 +26,13 @@
 #include <fstream>
 #include <stdexcept>
 
-config::~config()
-{
-}
-
-config::config()
-{
-}
-
 config::config(
     const char* filename )
+    : filename( filename )
 {
-    read( filename );
 }
 
-void config::read(
-    const char* filename )
+void config::read()
 {
     std::ifstream in;
     in.open( filename );
@@ -91,7 +82,7 @@ config::find(
 {
     const_iterator i = m_map.find( str );
     if ( m_map.end() == i ) {
-        return NULL;
+        return nullptr;
     } else {
         return &i->second;
     }

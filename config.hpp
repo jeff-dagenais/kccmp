@@ -1,13 +1,13 @@
 #ifndef KCCMP_CONFIG_HPP
 #define KCCMP_CONFIG_HPP
 /*----------------------------------------------------------------------
- * $Id: config.hpp,v 1.4 2012-02-12 01:31:30 salem Exp $             
+ * $Id: config.hpp,v 1.4 2012-02-12 01:31:30 salem Exp $
  *
  *
  * Copyright (C)   2005            Salem Ganzhorn <eyekode@yahoo.com>
  *
  * This file is part of kccmp - Kernel Config CoMPare
- *                                                                      
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of version 2 of the GNU General Public License
  * as published by the Free Software Foundation.
@@ -33,16 +33,14 @@
 ///@brief configuration data
 class config {
 public:
-    config();
     config( const char* filename );
-    ~config();
 
 public:
     typedef std::map<std::string, config_value> map;
     typedef map::const_iterator const_iterator;
 
 public:
-    void read( const char* filename );
+    void read();
     ///\brief delete all entries
     void clear();
     void add( const std::string& key, const config_value& cv );
@@ -67,6 +65,9 @@ protected:
 
 protected:
     map m_map;
+
+private:
+    const char* filename;
 };
 
 std::ostream& operator<<( std::ostream&, const config& );
